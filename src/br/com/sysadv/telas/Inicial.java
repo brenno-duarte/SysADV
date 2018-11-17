@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package br.com.sysadv.telas;
+import br.com.sysadv.classes.BackgroundedDesktopPane;
+import java.awt.Dimension;
 import java.sql.*;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 /**
  *
  * @author brenno
@@ -16,10 +20,20 @@ public class Inicial extends javax.swing.JFrame {
     /**
      * Creates new form Inicial
      */
+
+    private void centralizaForm(JInternalFrame frame) {
+        Dimension desktopSize = Desktop.getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+    
     public Inicial() {
         initComponents();
+        Desktop.setBorder(new BackgroundedDesktopPane());
+        this.setExtendedState(Inicial.MAXIMIZED_BOTH);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,21 +43,34 @@ public class Inicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        Desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadastrar = new javax.swing.JMenu();
         mItemCliente = new javax.swing.JMenuItem();
         mItemAdv = new javax.swing.JMenuItem();
-        mItemPro = new javax.swing.JMenuItem();
-        mItemLan = new javax.swing.JMenuItem();
-        menuSobre = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        mItemProcessos = new javax.swing.JMenuItem();
+        menuAgenda = new javax.swing.JMenu();
+        mItemAgenda = new javax.swing.JMenuItem();
+        menuAjuda = new javax.swing.JMenu();
+        menuSobre = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(294, 30));
+
+        menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Boss.png"))); // NOI18N
         menuCadastrar.setText("Cadastrar");
 
         mItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        mItemCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Male.png"))); // NOI18N
         mItemCliente.setText("Cliente");
+        mItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemClienteActionPerformed(evt);
+            }
+        });
         mItemCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mItemClienteKeyPressed(evt);
@@ -52,19 +79,73 @@ public class Inicial extends javax.swing.JFrame {
         menuCadastrar.add(mItemCliente);
 
         mItemAdv.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        mItemAdv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Boss.png"))); // NOI18N
         mItemAdv.setText("Advogado");
+        mItemAdv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemAdvActionPerformed(evt);
+            }
+        });
         menuCadastrar.add(mItemAdv);
-
-        mItemPro.setText("Processo");
-        menuCadastrar.add(mItemPro);
-
-        mItemLan.setText("Lançamento");
-        menuCadastrar.add(mItemLan);
 
         jMenuBar1.add(menuCadastrar);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Text.png"))); // NOI18N
+        jMenu2.setText("Processos");
+
+        mItemProcessos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Text.png"))); // NOI18N
+        mItemProcessos.setText("Ver Processos");
+        mItemProcessos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemProcessosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mItemProcessos);
+
+        jMenuBar1.add(jMenu2);
+
+        menuAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Calendar.png"))); // NOI18N
+        menuAgenda.setText("Agenda");
+        menuAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAgendaActionPerformed(evt);
+            }
+        });
+
+        mItemAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Notes.png"))); // NOI18N
+        mItemAgenda.setText("Ver agenda");
+        mItemAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemAgendaActionPerformed(evt);
+            }
+        });
+        menuAgenda.add(mItemAgenda);
+
+        jMenuBar1.add(menuAgenda);
+
+        menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Info.png"))); // NOI18N
+        menuAjuda.setText("Ajuda");
+
+        menuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Help_book_3d.png"))); // NOI18N
         menuSobre.setText("Sobre");
-        jMenuBar1.add(menuSobre);
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(menuSobre);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Exit.png"))); // NOI18N
+        jMenuItem1.setText("Sair");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(jMenuItem1);
+
+        jMenuBar1.add(menuAjuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -72,11 +153,11 @@ public class Inicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(Desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1031, 513));
@@ -86,6 +167,48 @@ public class Inicial extends javax.swing.JFrame {
     private void mItemClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mItemClienteKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_mItemClienteKeyPressed
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        Sobre sobre = new Sobre();
+        sobre.setVisible(true);
+        Desktop.add(sobre);
+        centralizaForm(sobre);
+    }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void mItemAdvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAdvActionPerformed
+        CadAdvogado adv = new CadAdvogado();
+        adv.setVisible(true);
+        Desktop.add(adv);
+        centralizaForm(adv);
+    }//GEN-LAST:event_mItemAdvActionPerformed
+
+    private void mItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemClienteActionPerformed
+        CadCliente cli = new CadCliente();
+        cli.setVisible(true);
+        Desktop.add(cli);
+        centralizaForm(cli);
+    }//GEN-LAST:event_mItemClienteActionPerformed
+
+    private void menuAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaActionPerformed
+        
+    }//GEN-LAST:event_menuAgendaActionPerformed
+
+    private void mItemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAgendaActionPerformed
+        Agenda agenda = new Agenda();
+        agenda.setVisible(true);
+        Desktop.add(agenda);
+        centralizaForm(agenda);
+    }//GEN-LAST:event_mItemAgendaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mItemProcessosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemProcessosActionPerformed
+        CadProcessos processos = new CadProcessos();
+        processos.setVisible(true);
+        Desktop.add(processos);
+    }//GEN-LAST:event_mItemProcessosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,13 +246,17 @@ public class Inicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem mItemAdv;
+    private javax.swing.JMenuItem mItemAgenda;
     private javax.swing.JMenuItem mItemCliente;
-    private javax.swing.JMenuItem mItemLan;
-    private javax.swing.JMenuItem mItemPro;
+    private javax.swing.JMenuItem mItemProcessos;
+    private javax.swing.JMenu menuAgenda;
+    private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastrar;
-    private javax.swing.JMenu menuSobre;
+    private javax.swing.JMenuItem menuSobre;
     // End of variables declaration//GEN-END:variables
 }
