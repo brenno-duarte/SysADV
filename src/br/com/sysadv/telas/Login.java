@@ -61,7 +61,6 @@ public class Login extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         dbStatus = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnProcessos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,19 +85,12 @@ public class Login extends javax.swing.JFrame {
 
         txtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Chandas", 1, 14))); // NOI18N
 
+        dbStatus.setBackground(java.awt.Color.white);
+        dbStatus.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        dbStatus.setForeground(java.awt.Color.white);
         dbStatus.setText("banco status");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/SysADVLogo.png"))); // NOI18N
-
-        btnProcessos.setBackground(new java.awt.Color(2, 3, 4));
-        btnProcessos.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        btnProcessos.setForeground(new java.awt.Color(246, 246, 246));
-        btnProcessos.setText("Verificar Processos");
-        btnProcessos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessosActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,14 +112,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(111, 111, 111)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnProcessos, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(176, 176, 176))))
+                .addContainerGap(210, Short.MAX_VALUE)
+                .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(202, 202, 202))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,11 +125,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(btnProcessos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(46, 46, 46)
                 .addComponent(dbStatus)
                 .addGap(40, 40, 40))
         );
@@ -169,12 +154,6 @@ public class Login extends javax.swing.JFrame {
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
-
-    private void btnProcessosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessosActionPerformed
-        Processos processos = new Processos();
-        processos.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnProcessosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +192,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessar;
-    private javax.swing.JButton btnProcessos;
     private javax.swing.JLabel dbStatus;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

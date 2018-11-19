@@ -4,18 +4,41 @@
  * and open the template in the editor.
  */
 package br.com.sysadv.telas;
-
+import br.com.sysadv.dal.Conexao;
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author brenno
  */
 public class CadProcessos extends javax.swing.JInternalFrame {
-
+    Connection conexao;
+    PreparedStatement pst;
+    ResultSet rs;
     /**
      * Creates new form CadProcessos
      */
     public CadProcessos() {
         initComponents();
+        conexao = Conexao.Conectar();
+    }
+    
+    public void CadastrarPro(){
+        String sql = "insert into tb_processos (nomeCli,numPro,situacaoCli,tipoAcao,naturezaAcao,situacaoPro,honorarios) values (?,?,?,?,?,?,?);";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, cbNomeCli.getSelectedItem().toString());
+            pst.setString(2, txtNumPro.getText());
+            pst.setString(3, cbSituacaoCli.getSelectedItem().toString());
+            pst.setString(4, cbTipoAcaoPro.getSelectedItem().toString());
+            pst.setString(5, cbNatAcaoPro.getSelectedItem().toString());
+            pst.setString(6, cbSituacaoPro.getSelectedItem().toString());
+            pst.setString(7, txtHonorarios.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Processo cadastrado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -28,68 +51,171 @@ public class CadProcessos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        cbSituacaoPro = new javax.swing.JComboBox<>();
+        btnEditarPro = new javax.swing.JButton();
+        cbTipoAcaoPro = new javax.swing.JComboBox<>();
+        btnPesqPro = new javax.swing.JButton();
+        btnExcluirPro = new javax.swing.JButton();
+        txtHonorarios = new javax.swing.JTextField();
+        cbSituacaoCli = new javax.swing.JComboBox<>();
+        cbNatAcaoPro = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNumPro = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        btnCadPro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        cbNomeCli = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(38, 123, 249));
         setClosable(true);
         setTitle("Processos");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
-        );
+        jPanel1.setBackground(java.awt.Color.white);
 
-        jTabbedPane1.addTab("Informações do processo", jPanel2);
+        cbSituacaoPro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1° instância", "2° instância", "3° instância", "Arquivado/Finalizado" }));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
-        );
+        btnEditarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Document Edit.png"))); // NOI18N
+        btnEditarPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jTabbedPane1.addTab("Primeira parte contrária", jPanel3);
+        cbTipoAcaoPro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrativo", "Cível", "Criminal", "Família", "Previdência", "Trabalhista", "Tributário" }));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
-        );
+        btnPesqPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Find Search.png"))); // NOI18N
+        btnPesqPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jTabbedPane1.addTab("Segunda parte contrária", jPanel4);
+        btnExcluirPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
+        btnExcluirPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        cbSituacaoCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Réu", "Autor" }));
+
+        cbNatAcaoPro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aberto", "Cancelado", "Finalizado" }));
+
+        jLabel13.setText("Honorários");
+
+        jLabel4.setText("Natureza da ação");
+
+        jLabel11.setText("Situação do processo");
+
+        jLabel2.setText("N° do processo");
+
+        jLabel6.setText("Tipo de ação");
+
+        btnCadPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Add.png"))); // NOI18N
+        btnCadPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadProActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome do cliente");
+
+        jLabel5.setText("Situação do cliente");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        cbNomeCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumPro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSituacaoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(229, 229, 229)
+                            .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnPesqPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEditarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnExcluirPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNumPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbSituacaoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesqPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluirPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,15 +229,35 @@ public class CadProcessos extends javax.swing.JInternalFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 894, 558);
+        setBounds(0, 0, 945, 547);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProActionPerformed
+        CadastrarPro();
+    }//GEN-LAST:event_btnCadProActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadPro;
+    private javax.swing.JButton btnEditarPro;
+    private javax.swing.JButton btnExcluirPro;
+    private javax.swing.JButton btnPesqPro;
+    private javax.swing.JComboBox<String> cbNatAcaoPro;
+    private javax.swing.JComboBox<String> cbNomeCli;
+    private javax.swing.JComboBox<String> cbSituacaoCli;
+    private javax.swing.JComboBox<String> cbSituacaoPro;
+    private javax.swing.JComboBox<String> cbTipoAcaoPro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtHonorarios;
+    private javax.swing.JTextField txtNumPro;
     // End of variables declaration//GEN-END:variables
 }

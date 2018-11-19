@@ -31,7 +31,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -46,46 +46,50 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtNomeAdv" min="-2" pref="523" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtCpfAdv" min="-2" pref="188" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtEmailAdv" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuarioAdv" min="-2" pref="266" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtNomeAdv" min="-2" pref="523" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCpfAdv" min="-2" pref="188" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtEmailAdv" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtUsuarioAdv" min="-2" pref="266" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtSenhaAdv" min="-2" pref="316" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField1" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="103" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtSenhaAdv" min="-2" pref="316" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                          <Component id="jButton4" min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton2" min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton3" min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
@@ -118,14 +122,14 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButton1" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jButton2" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jButton3" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jButton4" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="81" max="32767" attributes="0"/>
+                  <EmptySpace pref="63" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -150,14 +154,6 @@
             <Property name="text" type="java.lang.String" value="Senha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/sysadv/icones/Symbol - Add.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Cadastrar advogado"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="CPF"/>
@@ -169,14 +165,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomeAdv">
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/sysadv/icones/Symbol - Delete.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Excluir advogado"/>
-          </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -201,22 +189,6 @@
         </Container>
         <Component class="javax.swing.JPasswordField" name="txtSenhaAdv">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/sysadv/icones/Find Search.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Visualizar advogado"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/sysadv/icones/Document Edit.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Editar advogado"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="txtEmailAdv">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -225,6 +197,46 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton4">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/sysadv/icones/Symbol - Add.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor em Forma de M&#xe3;o"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/sysadv/icones/Find Search.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor em Forma de M&#xe3;o"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/sysadv/icones/Document Edit.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor em Forma de M&#xe3;o"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton3">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/sysadv/icones/Symbol - Delete.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor em Forma de M&#xe3;o"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

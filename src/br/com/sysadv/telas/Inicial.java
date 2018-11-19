@@ -49,7 +49,7 @@ public class Inicial extends javax.swing.JFrame {
         mItemCliente = new javax.swing.JMenuItem();
         mItemAdv = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mItemProcessos = new javax.swing.JMenuItem();
+        mItemVerPro = new javax.swing.JMenuItem();
         menuAgenda = new javax.swing.JMenu();
         mItemAgenda = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
@@ -57,10 +57,11 @@ public class Inicial extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SysADV");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(294, 30));
 
-        menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Boss.png"))); // NOI18N
+        menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/User_group.png"))); // NOI18N
         menuCadastrar.setText("Cadastrar");
 
         mItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
@@ -93,14 +94,15 @@ public class Inicial extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Text.png"))); // NOI18N
         jMenu2.setText("Processos");
 
-        mItemProcessos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Text.png"))); // NOI18N
-        mItemProcessos.setText("Ver Processos");
-        mItemProcessos.addActionListener(new java.awt.event.ActionListener() {
+        mItemVerPro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        mItemVerPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Text.png"))); // NOI18N
+        mItemVerPro.setText("Ver Processos");
+        mItemVerPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mItemProcessosActionPerformed(evt);
+                mItemVerProActionPerformed(evt);
             }
         });
-        jMenu2.add(mItemProcessos);
+        jMenu2.add(mItemVerPro);
 
         jMenuBar1.add(jMenu2);
 
@@ -112,6 +114,7 @@ public class Inicial extends javax.swing.JFrame {
             }
         });
 
+        mItemAgenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mItemAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Notes.png"))); // NOI18N
         mItemAgenda.setText("Ver agenda");
         mItemAgenda.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +129,7 @@ public class Inicial extends javax.swing.JFrame {
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Info.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
 
-        menuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         menuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Help_book_3d.png"))); // NOI18N
         menuSobre.setText("Sobre");
         menuSobre.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +139,7 @@ public class Inicial extends javax.swing.JFrame {
         });
         menuAjuda.add(menuSobre);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Exit.png"))); // NOI18N
         jMenuItem1.setText("Sair");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -204,11 +208,12 @@ public class Inicial extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void mItemProcessosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemProcessosActionPerformed
+    private void mItemVerProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemVerProActionPerformed
         CadProcessos processos = new CadProcessos();
         processos.setVisible(true);
         Desktop.add(processos);
-    }//GEN-LAST:event_mItemProcessosActionPerformed
+        centralizaForm(processos);
+    }//GEN-LAST:event_mItemVerProActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,7 +258,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemAdv;
     private javax.swing.JMenuItem mItemAgenda;
     private javax.swing.JMenuItem mItemCliente;
-    private javax.swing.JMenuItem mItemProcessos;
+    private javax.swing.JMenuItem mItemVerPro;
     private javax.swing.JMenu menuAgenda;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastrar;

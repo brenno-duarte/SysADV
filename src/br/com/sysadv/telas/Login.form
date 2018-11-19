@@ -68,17 +68,9 @@
                   </Group>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnAcessar" min="-2" pref="91" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnProcessos" min="-2" pref="139" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                  <Component id="btnAcessar" min="-2" pref="91" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,11 +83,9 @@
                   <Component id="txtLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtSenha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
                   <Component id="btnAcessar" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
-                  <Component id="btnProcessos" min="-2" pref="22" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="dbStatus" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
@@ -144,6 +134,15 @@
         </Component>
         <Component class="javax.swing.JLabel" name="dbStatus">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Noto Sans" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="banco status"/>
           </Properties>
         </Component>
@@ -153,23 +152,6 @@
               <Image iconType="3" name="/br/com/sysadv/icones/SysADVLogo.png"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnProcessos">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="4" green="3" red="2" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Noto Sans" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f6" green="f6" red="f6" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Verificar Processos"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcessosActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
