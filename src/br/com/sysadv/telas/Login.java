@@ -63,6 +63,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SysADV - Login");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(163, 153, 112));

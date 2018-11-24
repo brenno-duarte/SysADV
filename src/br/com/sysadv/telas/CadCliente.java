@@ -26,9 +26,22 @@ public class CadCliente extends javax.swing.JInternalFrame {
     public CadCliente() {
         initComponents();
         conexao = Conexao.Conectar();
+        pesqCli();
     }
 
-    public void CadastrarCliente() {
+    public void limparCampos() {
+        txtNomeCli.setText(null);
+        txtCpfCli.setText(null);
+        txtRuaCli.setText(null);
+        txtBairroCli.setText(null);
+        txtCidadeCli.setText(null);
+        txtEstadoCli.setText(null);
+        txtNumeroCli.setText(null);
+        txtIdCli.setText(null);
+        btnCadCli.setEnabled(true);
+    }
+
+    public void cadastrarCliente() {
         String sql = "insert into tb_clientes (nomeCli,cpfCli,sexoCli,ruaCli,bairroCli,cidadeCli,estadoCli,numeroCli) values (?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
@@ -54,26 +67,82 @@ public class CadCliente extends javax.swing.JInternalFrame {
         }
     }
 
+    public void alterarCli() {
+        String sql = "update tb_clientes set nomeCli=?,cpfCli=?,sexoCli=?,ruaCli=?,bairroCli=?,cidadeCli=?,estadoCli=?,numeroCli=? where idcli=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtNomeCli.getText());
+            pst.setString(2, txtCpfCli.getText());
+            pst.setString(3, cbSexoCli.getSelectedItem().toString());
+            pst.setString(4, txtRuaCli.getText());
+            pst.setString(5, txtBairroCli.getText());
+            pst.setString(6, txtCidadeCli.getText());
+            pst.setString(7, txtEstadoCli.getText());
+            pst.setString(8, txtNumeroCli.getText());
+            pst.setString(9, txtIdCli.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso");
+            txtNomeCli.setText(null);
+            txtCpfCli.setText(null);
+            txtRuaCli.setText(null);
+            txtBairroCli.setText(null);
+            txtCidadeCli.setText(null);
+            txtEstadoCli.setText(null);
+            txtNumeroCli.setText(null);
+            txtIdCli.setText(null);
+            btnCadCli.setEnabled(true);
+            pesqCli();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void deletarCli() {
+        String sql = "delete from tb_clientes where idcli=1";
+        try {
+            int confirmar = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este cliente?", "Aviso", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtIdCli.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente removido com sucesso");
+                txtNomeCli.setText(null);
+                txtCpfCli.setText(null);
+                txtRuaCli.setText(null);
+                txtBairroCli.setText(null);
+                txtCidadeCli.setText(null);
+                txtEstadoCli.setText(null);
+                txtNumeroCli.setText(null);
+                txtIdCli.setText(null);
+                pesqCli();
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public void tabelaClientes() {
         int setar = tbClientes.getSelectedRow();
+        txtIdCli.setText(tbClientes.getModel().getValueAt(setar, 0).toString());
         txtNomeCli.setText(tbClientes.getModel().getValueAt(setar, 1).toString());
         txtCpfCli.setText(tbClientes.getModel().getValueAt(setar, 2).toString());
+        cbSexoCli.setSelectedItem(tbClientes.getModel().getValueAt(setar, 3).toString());
         txtRuaCli.setText(tbClientes.getModel().getValueAt(setar, 4).toString());
-        txtNumeroCli.setText(tbClientes.getModel().getValueAt(setar, 5).toString());
-        txtBairroCli.setText(tbClientes.getModel().getValueAt(setar, 6).toString());
-        txtCidadeCli.setText(tbClientes.getModel().getValueAt(setar, 7).toString());
-        txtEstadoCli.setText(tbClientes.getModel().getValueAt(setar, 8).toString());
-        
+        txtBairroCli.setText(tbClientes.getModel().getValueAt(setar, 5).toString());
+        txtCidadeCli.setText(tbClientes.getModel().getValueAt(setar, 6).toString());
+        txtEstadoCli.setText(tbClientes.getModel().getValueAt(setar, 7).toString());
+        txtNumeroCli.setText(tbClientes.getModel().getValueAt(setar, 8).toString());
+        btnCadCli.setEnabled(false);
     }
-    
-    public void pesqCli(){
-        String sql = "select * from tb_clientes where nomeCli like ?";
+
+    public void pesqCli() {
+        String sql = "select idcli as Id,nomeCli as Nome, cpfCli as CPF, sexoCli as Sexo, ruaCli as Rua, bairroCli as Bairro, cidadeCli as Cidade, estadoCli as Estado, numeroCli as Num from tb_clientes where nomeCli like ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtPesqCli.getText() + "%");
             rs = pst.executeQuery();
             tbClientes.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 
@@ -103,14 +172,16 @@ public class CadCliente extends javax.swing.JInternalFrame {
         txtEstadoCli = new javax.swing.JTextField();
         txtNomeCli = new javax.swing.JTextField();
         btnCadCli = new javax.swing.JButton();
-        btnPesqCli = new javax.swing.JButton();
         btnEditarCli = new javax.swing.JButton();
-        btnExcluirCli = new javax.swing.JButton();
         txtCidadeCli = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         cbSexoCli = new javax.swing.JComboBox<>();
         txtPesqCli = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtIdCli = new javax.swing.JTextField();
+        btnExcluirCli1 = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(34, 144, 254));
         setClosable(true);
@@ -134,13 +205,13 @@ public class CadCliente extends javax.swing.JInternalFrame {
 
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "CPF", "Sexo", "Rua", "Bairro", "Cidade", "Estado", "N°"
             }
         ));
         tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,14 +229,13 @@ public class CadCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPesqCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Find Search.png"))); // NOI18N
-        btnPesqCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         btnEditarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Document Edit.png"))); // NOI18N
         btnEditarCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btnExcluirCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
-        btnExcluirCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCliActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Sexo");
 
@@ -180,6 +250,23 @@ public class CadCliente extends javax.swing.JInternalFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/View.png"))); // NOI18N
         jLabel9.setText("Pesquisar");
 
+        jLabel10.setText("Id");
+
+        btnExcluirCli1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
+        btnExcluirCli1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluirCli1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirCli1ActionPerformed(evt);
+            }
+        });
+
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Remove.png"))); // NOI18N
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -192,55 +279,62 @@ public class CadCliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRuaCli, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumeroCli)
-                        .addGap(245, 245, 245))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbSexoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCpfCli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(45, 45, 45))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCadCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEditarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnExcluirCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBairroCli, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCidadeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBairroCli, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCidadeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEstadoCli, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRuaCli, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumeroCli)
+                                .addGap(104, 104, 104))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cbSexoCli, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtCpfCli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(45, 45, 45))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(btnCadCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluirCli1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +345,11 @@ public class CadCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -274,12 +372,12 @@ public class CadCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtEstadoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCidadeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(btnCadCli, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluirCli1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,7 +395,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadCliActionPerformed
-        CadastrarCliente();
+        cadastrarCliente();
     }//GEN-LAST:event_btnCadCliActionPerformed
 
     private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
@@ -308,14 +406,27 @@ public class CadCliente extends javax.swing.JInternalFrame {
         pesqCli();
     }//GEN-LAST:event_txtPesqCliKeyReleased
 
+    private void btnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCliActionPerformed
+        alterarCli();
+    }//GEN-LAST:event_btnEditarCliActionPerformed
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void btnExcluirCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCli1ActionPerformed
+        deletarCli();
+    }//GEN-LAST:event_btnExcluirCli1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCli;
     private javax.swing.JButton btnEditarCli;
-    private javax.swing.JButton btnExcluirCli;
-    private javax.swing.JButton btnPesqCli;
+    private javax.swing.JButton btnExcluirCli1;
+    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JComboBox<String> cbSexoCli;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -331,6 +442,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCidadeCli;
     private javax.swing.JTextField txtCpfCli;
     private javax.swing.JTextField txtEstadoCli;
+    private javax.swing.JTextField txtIdCli;
     private javax.swing.JTextField txtNomeCli;
     private javax.swing.JTextField txtNumeroCli;
     private javax.swing.JTextField txtPesqCli;
