@@ -50,6 +50,7 @@ public class Inicial extends javax.swing.JFrame {
         mItemAdv = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mItemVerPro = new javax.swing.JMenuItem();
+        mItemNovoPro = new javax.swing.JMenuItem();
         menuAgenda = new javax.swing.JMenu();
         mItemAgenda = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
@@ -103,6 +104,16 @@ public class Inicial extends javax.swing.JFrame {
             }
         });
         jMenu2.add(mItemVerPro);
+
+        mItemNovoPro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        mItemNovoPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Notes.png"))); // NOI18N
+        mItemNovoPro.setText("Novo Processo");
+        mItemNovoPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemNovoProActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mItemNovoPro);
 
         jMenuBar1.add(jMenu2);
 
@@ -209,11 +220,18 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mItemVerProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemVerProActionPerformed
-        CadProcessos processos = new CadProcessos();
+        Processos processos = new Processos();
         processos.setVisible(true);
         Desktop.add(processos);
         centralizaForm(processos);
     }//GEN-LAST:event_mItemVerProActionPerformed
+
+    private void mItemNovoProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemNovoProActionPerformed
+        CadProcessos cadPro = new CadProcessos();
+        cadPro.setVisible(true);
+        Desktop.add(cadPro);
+        centralizaForm(cadPro);
+    }//GEN-LAST:event_mItemNovoProActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,6 +276,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemAdv;
     private javax.swing.JMenuItem mItemAgenda;
     private javax.swing.JMenuItem mItemCliente;
+    private javax.swing.JMenuItem mItemNovoPro;
     private javax.swing.JMenuItem mItemVerPro;
     private javax.swing.JMenu menuAgenda;
     private javax.swing.JMenu menuAjuda;

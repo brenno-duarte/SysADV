@@ -371,6 +371,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtIdCli">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnExcluirCli1">
           <Properties>

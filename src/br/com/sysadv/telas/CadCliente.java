@@ -252,6 +252,9 @@ public class CadCliente extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Id");
 
+        txtIdCli.setEditable(false);
+        txtIdCli.setEnabled(false);
+
         btnExcluirCli1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
         btnExcluirCli1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluirCli1.addActionListener(new java.awt.event.ActionListener() {

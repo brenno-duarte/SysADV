@@ -26,32 +26,27 @@ public class CadProcessos extends javax.swing.JInternalFrame {
     public CadProcessos() {
         initComponents();
         conexao = Conexao.Conectar();
-        this.mudarCbCli();
-        pesqPro();
+        //this.mudarCbCli();
+        pesqCli();
     }
 
-    public void tabelaProcessos() {
-        int setar = tbPro.getSelectedRow();
-        txtIdCli.setText(tbPro.getModel().getValueAt(setar, 0).toString());
-        cbNomeCli.setSelectedItem(tbPro.getModel().getValueAt(setar, 1).toString());
-        txtNumPro.setText(tbPro.getModel().getValueAt(setar, 2).toString());
-        cbSituacaoCli.setSelectedItem(tbPro.getModel().getValueAt(setar, 3).toString());
-        cbTipoAcaoPro.setSelectedItem(tbPro.getModel().getValueAt(setar, 4).toString());
-        cbNatAcaoPro.setSelectedItem(tbPro.getModel().getValueAt(setar, 5).toString());
-        cbSituacaoPro.setSelectedItem(tbPro.getModel().getValueAt(setar, 6).toString());
-        txtHonorarios.setText(tbPro.getModel().getValueAt(setar, 7).toString());
-        btnCadPro.setEnabled(false);
-
+    public void tabelaCli() {
+        int setar = tbClientes.getSelectedRow();
+        txtIdCli.setText(tbClientes.getModel().getValueAt(setar, 0).toString());
     }
 
     public void limparCampos() {
+        cbSituacaoCli.setSelectedItem("Selecione a situação do cliente");
+        cbTipoAcaoPro.setSelectedItem("Selecione o tipo de ação");
+        cbNatAcaoPro.setSelectedItem("Selecione a natureza da ação");
+        cbSituacaoPro.setSelectedItem("Selecione a situação do processo");
         txtIdCli.setText(null);
         txtNumPro.setText(null);
         txtHonorarios.setText(null);
         btnCadPro.setEnabled(true);
     }
 
-    public void mudarCbCli() {
+    /*public void mudarCbCli() {
         String sql = "select nomeCli from tb_clientes";
         try {
             pst = conexao.prepareStatement(sql);
@@ -62,15 +57,14 @@ public class CadProcessos extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }
-
-    public void pesqPro() {
-        String sql = "select a.idpro as ID, b.nomeCli,a.numPro as N_do_Pro, a.situacaoCli as Situacao, a.tipoAcao as Tipo_Acao, a.naturezaAcao as Natureza_Acao, a.situacaoPro as Situacao_Pro, a.honorarios as Honorarios from tb_processos a inner join tb_clientes b on a.idcli = b.idcli where nomeCli like ?";
+    }*/
+    public void pesqCli() {
+        String sql = "select idcli as Id,nomeCli as Nome, cpfCli as CPF, sexoCli as Sexo, ruaCli as Rua, bairroCli as Bairro, cidadeCli as Cidade, estadoCli as Estado, numeroCli as Num from tb_clientes where nomeCli like ?";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtPesqPro.getText() + "%");
+            pst.setString(1, txtPesqCli.getText() + "%");
             rs = pst.executeQuery();
-            tbPro.setModel(DbUtils.resultSetToTableModel(rs));
+            tbClientes.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -94,8 +88,8 @@ public class CadProcessos extends javax.swing.JInternalFrame {
         }
     }
 
-    public void alterarPro() {
-        String sql = "update tb_processos set numPro=?,situacaoCli=?,tipoAcao=?,naturezaAcao=?,situacaoPro=?,honorarios=? where idcli=?";
+    /*public void alterarPro() {
+        String sql = "update tb_processos set numPro=?,situacaoCli=?,tipoAcao=?,naturezaAcao=?,situacaoPro=?,honorarios=? where idpro=?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNumPro.getText());
@@ -104,11 +98,10 @@ public class CadProcessos extends javax.swing.JInternalFrame {
             pst.setString(4, cbNatAcaoPro.getSelectedItem().toString());
             pst.setString(5, cbSituacaoPro.getSelectedItem().toString());
             pst.setString(6, txtHonorarios.getText());
-            pst.setString(7, txtIdCli.getText());
+            //pst.setString(7, txtIdPro.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Processo alterado com sucesso!");
             txtIdCli.setText(null);
-            cbNomeCli.setSelectedItem("Selecione o cliente");
             cbSituacaoCli.setSelectedItem("Selecione a situação do cliente");
             cbTipoAcaoPro.setSelectedItem("Selecione o tipo de ação");
             cbNatAcaoPro.setSelectedItem("Selecione a natureza da ação");
@@ -119,7 +112,7 @@ public class CadProcessos extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,9 +125,7 @@ public class CadProcessos extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         cbSituacaoPro = new javax.swing.JComboBox<>();
-        btnEditarPro = new javax.swing.JButton();
         cbTipoAcaoPro = new javax.swing.JComboBox<>();
-        btnLimparCampos = new javax.swing.JButton();
         txtHonorarios = new javax.swing.JTextField();
         cbSituacaoCli = new javax.swing.JComboBox<>();
         cbNatAcaoPro = new javax.swing.JComboBox<>();
@@ -145,42 +136,23 @@ public class CadProcessos extends javax.swing.JInternalFrame {
         txtNumPro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnCadPro = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPro = new javax.swing.JTable();
-        cbNomeCli = new javax.swing.JComboBox<>();
+        tbClientes = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        txtPesqPro = new javax.swing.JTextField();
-        btnExcluirPro1 = new javax.swing.JButton();
+        txtPesqCli = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtIdCli = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(38, 123, 249));
         setClosable(true);
-        setTitle("Processos");
+        setTitle("Cadastrar Processo");
 
         jPanel1.setBackground(java.awt.Color.white);
 
         cbSituacaoPro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a situação do processo", "1° instância", "2° instância", "3° instância", "Arquivado/Finalizado" }));
 
-        btnEditarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Document Edit.png"))); // NOI18N
-        btnEditarPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarPro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarProActionPerformed(evt);
-            }
-        });
-
         cbTipoAcaoPro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o tipo de ação", "Administrativo", "Cível", "Criminal", "Família", "Previdência", "Trabalhista", "Tributário" }));
-
-        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Remove.png"))); // NOI18N
-        btnLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparCamposActionPerformed(evt);
-            }
-        });
 
         cbSituacaoCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a situação do cliente", "Réu", "Autor" }));
 
@@ -204,11 +176,9 @@ public class CadProcessos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Nome do cliente");
-
         jLabel5.setText("Situação do cliente");
 
-        tbPro.setModel(new javax.swing.table.DefaultTableModel(
+        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -219,92 +189,81 @@ public class CadProcessos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbPro.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbProMouseClicked(evt);
+                tbClientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbPro);
-
-        cbNomeCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o cliente" }));
+        jScrollPane1.setViewportView(tbClientes);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/View.png"))); // NOI18N
-        jLabel3.setText("Pesquisar");
+        jLabel3.setText("Pesquisar cliente");
 
-        txtPesqPro.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPesqCli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesqProKeyReleased(evt);
+                txtPesqCliKeyReleased(evt);
             }
         });
 
-        btnExcluirPro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
-        btnExcluirPro1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jLabel7.setText("Id Cliente");
+
+        txtIdCli.setEditable(false);
+        txtIdCli.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(644, 644, 644))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNumPro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbSituacaoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(138, 138, 138))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(237, 237, 237)
-                                    .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnEditarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnExcluirPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(329, 329, 329)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(304, 304, 304))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPesqPro, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60))))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNumPro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbSituacaoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(395, 395, 395)
+                        .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,42 +271,38 @@ public class CadProcessos extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtPesqPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesqCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(txtNumPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(cbSituacaoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(cbTipoAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(cbNatAcaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbSituacaoPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -363,41 +318,28 @@ public class CadProcessos extends javax.swing.JInternalFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 945, 627);
+        setBounds(0, 0, 880, 627);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProActionPerformed
         cadastrarPro();
     }//GEN-LAST:event_btnCadProActionPerformed
 
-    private void btnEditarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProActionPerformed
-        alterarPro();
-    }//GEN-LAST:event_btnEditarProActionPerformed
+    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
+        tabelaCli();
+    }//GEN-LAST:event_tbClientesMouseClicked
 
-    private void tbProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProMouseClicked
-        tabelaProcessos();
-    }//GEN-LAST:event_tbProMouseClicked
-
-    private void txtPesqProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesqProKeyReleased
-        pesqPro();
-    }//GEN-LAST:event_txtPesqProKeyReleased
-
-    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        limparCampos();
-    }//GEN-LAST:event_btnLimparCamposActionPerformed
+    private void txtPesqCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesqCliKeyReleased
+        pesqCli();
+    }//GEN-LAST:event_txtPesqCliKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadPro;
-    private javax.swing.JButton btnEditarPro;
-    private javax.swing.JButton btnExcluirPro1;
-    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JComboBox<String> cbNatAcaoPro;
-    private javax.swing.JComboBox<String> cbNomeCli;
     private javax.swing.JComboBox<String> cbSituacaoCli;
     private javax.swing.JComboBox<String> cbSituacaoPro;
     private javax.swing.JComboBox<String> cbTipoAcaoPro;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -408,10 +350,10 @@ public class CadProcessos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbPro;
+    private javax.swing.JTable tbClientes;
     private javax.swing.JTextField txtHonorarios;
     private javax.swing.JTextField txtIdCli;
     private javax.swing.JTextField txtNumPro;
-    private javax.swing.JTextField txtPesqPro;
+    private javax.swing.JTextField txtPesqCli;
     // End of variables declaration//GEN-END:variables
 }
