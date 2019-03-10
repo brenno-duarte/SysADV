@@ -4,19 +4,23 @@
  * and open the template in the editor.
  */
 package br.com.sysadv.telas;
+
 import br.com.sysadv.classes.BackgroundedDesktopPane;
 import java.awt.Dimension;
 import java.sql.*;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+
 /**
  *
  * @author brenno
  */
 public class Inicial extends javax.swing.JFrame {
+
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
+
     /**
      * Creates new form Inicial
      */
@@ -27,13 +31,13 @@ public class Inicial extends javax.swing.JFrame {
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
-    
+
     public Inicial() {
         initComponents();
         Desktop.setBorder(new BackgroundedDesktopPane());
         this.setExtendedState(Inicial.MAXIMIZED_BOTH);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +57,7 @@ public class Inicial extends javax.swing.JFrame {
         mItemNovoPro = new javax.swing.JMenuItem();
         menuAgenda = new javax.swing.JMenu();
         mItemAgenda = new javax.swing.JMenuItem();
+        mItemCom = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuSobre = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -135,6 +140,16 @@ public class Inicial extends javax.swing.JFrame {
         });
         menuAgenda.add(mItemAgenda);
 
+        mItemCom.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mItemCom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Calendar.png"))); // NOI18N
+        mItemCom.setText("Novo Compromisso");
+        mItemCom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemComActionPerformed(evt);
+            }
+        });
+        menuAgenda.add(mItemCom);
+
         jMenuBar1.add(menuAgenda);
 
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Info.png"))); // NOI18N
@@ -205,7 +220,7 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mItemClienteActionPerformed
 
     private void menuAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaActionPerformed
-        
+
     }//GEN-LAST:event_menuAgendaActionPerformed
 
     private void mItemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAgendaActionPerformed
@@ -232,6 +247,13 @@ public class Inicial extends javax.swing.JFrame {
         Desktop.add(cadPro);
         centralizaForm(cadPro);
     }//GEN-LAST:event_mItemNovoProActionPerformed
+
+    private void mItemComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemComActionPerformed
+        CadCompromisso agenda = new CadCompromisso();
+        agenda.setVisible(true);
+        Desktop.add(agenda);
+        centralizaForm(agenda);
+    }//GEN-LAST:event_mItemComActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,6 +298,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemAdv;
     private javax.swing.JMenuItem mItemAgenda;
     private javax.swing.JMenuItem mItemCliente;
+    private javax.swing.JMenuItem mItemCom;
     private javax.swing.JMenuItem mItemNovoPro;
     private javax.swing.JMenuItem mItemVerPro;
     private javax.swing.JMenu menuAgenda;

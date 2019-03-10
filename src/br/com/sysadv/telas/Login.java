@@ -4,21 +4,25 @@
  * and open the template in the editor.
  */
 package br.com.sysadv.telas;
+
 import br.com.sysadv.dal.Conexao;
 import java.sql.*;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author brenno
  */
 public class Login extends javax.swing.JFrame {
+
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
+
     /**
      * Creates new form Login
      */
-    public void Logar(){
+    public void Logar() {
         String sql = "select * from tb_advogado where loginAdv=? and senhaAdv=?";
         try {
             pst = conexao.prepareStatement(sql);
@@ -36,16 +40,17 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     public Login() {
         initComponents();
         conexao = Conexao.Conectar();
-        if (conexao!=null) {
+        if (conexao != null) {
             dbStatus.setText("Banco OK");
-        } else
+        } else {
             dbStatus.setText("Banco não conectado");
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +83,7 @@ public class Login extends javax.swing.JFrame {
         btnAcessar.setBackground(new java.awt.Color(173, 173, 173));
         btnAcessar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnAcessar.setText("Acessar");
+        btnAcessar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnAcessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcessarActionPerformed(evt);

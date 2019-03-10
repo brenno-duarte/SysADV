@@ -46,18 +46,6 @@ public class CadProcessos extends javax.swing.JInternalFrame {
         btnCadPro.setEnabled(true);
     }
 
-    /*public void mudarCbCli() {
-        String sql = "select nomeCli from tb_clientes";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cbNomeCli.addItem(rs.getString("nomeCli"));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }*/
     public void pesqCli() {
         String sql = "select idcli as Id,nomeCli as Nome, cpfCli as CPF, sexoCli as Sexo, ruaCli as Rua, bairroCli as Bairro, cidadeCli as Cidade, estadoCli as Estado, numeroCli as Num from tb_clientes where nomeCli like ?";
         try {
@@ -87,6 +75,19 @@ public class CadProcessos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+    /*public void mudarCbCli() {
+        String sql = "select nomeCli from tb_clientes";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                cbNomeCli.addItem(rs.getString("nomeCli"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }*/
 
     /*public void alterarPro() {
         String sql = "update tb_processos set numPro=?,situacaoCli=?,tipoAcao=?,naturezaAcao=?,situacaoPro=?,honorarios=? where idpro=?";
@@ -168,7 +169,8 @@ public class CadProcessos extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tipo de ação");
 
-        btnCadPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Add.png"))); // NOI18N
+        btnCadPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Create.png"))); // NOI18N
+        btnCadPro.setText("Cadastrar");
         btnCadPro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCadPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,8 +233,7 @@ public class CadProcessos extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(304, 304, 304))
+                                .addComponent(txtIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,8 +262,8 @@ public class CadProcessos extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(395, 395, 395)
-                        .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(369, 369, 369)
+                        .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,9 +301,9 @@ public class CadProcessos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHonorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addComponent(btnCadPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(btnCadPro)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

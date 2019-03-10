@@ -21,6 +21,7 @@ public class Processos extends javax.swing.JInternalFrame {
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
+
     /**
      * Creates new form Processos
      */
@@ -30,12 +31,12 @@ public class Processos extends javax.swing.JInternalFrame {
         pesqPro();
         txtIdPro.setVisible(false);
     }
-    
+
     public void tabelaProcessos() {
         int setar = tbPro.getSelectedRow();
         txtIdPro.setText(tbPro.getModel().getValueAt(setar, 0).toString());
     }
-    
+
     public void pesqPro() {
         String sql = "select a.idpro as ID_Pro, b.nomeCli,a.numPro as N_do_Pro, a.situacaoCli as Situacao, a.tipoAcao as Tipo_Acao, a.naturezaAcao as Natureza_Acao, a.situacaoPro as Situacao_Pro, a.honorarios as Honorarios from tb_processos a inner join tb_clientes b on a.idcli = b.idcli where nomeCli like ?";
         try {
@@ -47,7 +48,7 @@ public class Processos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     public void deletarPro() {
         String sql = "delete from tb_processos where idpro=?";
         try {
@@ -63,7 +64,7 @@ public class Processos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,7 +114,8 @@ public class Processos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcluirPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Symbol - Delete.png"))); // NOI18N
+        btnExcluirPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sysadv/icones/Delete.png"))); // NOI18N
+        btnExcluirPro.setText("Excluir");
         btnExcluirPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirProActionPerformed(evt);
@@ -140,8 +142,8 @@ public class Processos extends javax.swing.JInternalFrame {
                                 .addGap(35, 35, 35)
                                 .addComponent(txtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(420, 420, 420)
-                        .addComponent(btnExcluirPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(470, 470, 470)
+                        .addComponent(btnExcluirPro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -152,11 +154,11 @@ public class Processos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtPesqPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnExcluirPro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnExcluirPro)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
