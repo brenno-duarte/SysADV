@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 public class Conexao {
     public static Connection Conectar(){
         java.sql.Connection conexao = null;
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/db_sysadv";
-        String user = "root";
-        String password = "";
+        String user = "brenno";
+        String password = "123";
         try {
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, user, password);

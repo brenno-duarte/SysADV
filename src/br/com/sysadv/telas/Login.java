@@ -6,6 +6,9 @@
 package br.com.sysadv.telas;
 
 import br.com.sysadv.dal.Conexao;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -18,7 +21,7 @@ public class Login extends javax.swing.JFrame {
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
-
+    
     /**
      * Creates new form Login
      */

@@ -22,7 +22,7 @@ public class Agenda extends javax.swing.JInternalFrame {
      */
     public Agenda() {
         initComponents();
-        //conexao = Conexao.Conectar();
+        con = Conexao.Conectar();
         tabelaAgenda();
     }
     

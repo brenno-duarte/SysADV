@@ -8,6 +8,7 @@ package br.com.sysadv.telas;
 import br.com.sysadv.classes.BackgroundedDesktopPane;
 import java.awt.Dimension;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
@@ -36,6 +37,8 @@ public class Inicial extends javax.swing.JFrame {
         initComponents();
         Desktop.setBorder(new BackgroundedDesktopPane());
         this.setExtendedState(Inicial.MAXIMIZED_BOTH);
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("/br/com/sysadv/icones/SysADVLogo.png"));  
+        setIconImage(icon.getImage());
     }
 
     /**
@@ -64,6 +67,7 @@ public class Inicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SysADV");
+        setResizable(false);
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(294, 30));
 
@@ -220,7 +224,10 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mItemClienteActionPerformed
 
     private void menuAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaActionPerformed
-
+        Agenda agenda = new Agenda();
+        agenda.setVisible(true);
+        Desktop.add(agenda);
+        centralizaForm(agenda);
     }//GEN-LAST:event_menuAgendaActionPerformed
 
     private void mItemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAgendaActionPerformed
